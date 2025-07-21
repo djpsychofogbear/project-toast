@@ -3,7 +3,7 @@ import React from 'react';
 import Toast from '../Toast';
 import styles from './ToastShelf.module.css';
 
-function ToastShelf() {
+function ToastShelf(): React.ReactElement {
   return (
     <ol className={styles.wrapper}>
       <li className={styles.toastWrapper}>
@@ -16,4 +16,4 @@ function ToastShelf() {
   );
 }
 
-export default ToastShelf;
+export default ToastShelf; 

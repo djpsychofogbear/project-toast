@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Footer.module.css';
 
-function Footer() {
+function Footer(): React.ReactElement {
   return (
     <footer className={styles.wrapper}>
       <p>
@@ -17,4 +17,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default Footer; 

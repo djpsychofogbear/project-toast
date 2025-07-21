@@ -4,9 +4,11 @@ import Button from '../Button';
 
 import styles from './ToastPlayground.module.css';
 
-const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
+type ToastVariant = 'notice' | 'warning' | 'success' | 'error';
 
-function ToastPlayground() {
+const VARIANT_OPTIONS: ToastVariant[] = ['notice', 'warning', 'success', 'error'];
+
+function ToastPlayground(): React.ReactElement {
   return (
     <div className={styles.wrapper}>
       <header>
@@ -60,4 +62,4 @@ function ToastPlayground() {
   );
 }
 
-export default ToastPlayground;
+export default ToastPlayground; 
