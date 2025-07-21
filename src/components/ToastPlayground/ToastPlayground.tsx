@@ -7,8 +7,20 @@ import styles from './ToastPlayground.module.css';
 type ToastVariant = 'notice' | 'warning' | 'success' | 'error';
 
 const VARIANT_OPTIONS: ToastVariant[] = ['notice', 'warning', 'success', 'error'];
+const VARIANT_RADIO_GROUP_NAME = 'variant';
 
 function ToastPlayground(): React.ReactElement {
+  const [variant, setVariant] = React.useState<ToastVariant>('notice');
+  const [message, setMessage] = React.useState<string>('');
+
+  const handleVariantChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVariant(event.target.value as ToastVariant);
+  };
+
+  const handleMessageChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(event.target.value);
+  };
+
   return (
     <div className={styles.wrapper}>
       <header>
@@ -26,7 +38,7 @@ function ToastPlayground(): React.ReactElement {
             Message
           </label>
           <div className={styles.inputWrapper}>
-            <textarea id="message" className={styles.messageInput} />
+            <textarea id="message" className={styles.messageInput} value={message} onChange={handleMessageChange} />
           </div>
         </div>
 
@@ -35,15 +47,19 @@ function ToastPlayground(): React.ReactElement {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <label htmlFor="variant-notice">
-              <input
-                id="variant-notice"
-                type="radio"
-                name="variant"
-                value="notice"
-              />
-              notice
-            </label>
+            {VARIANT_OPTIONS.map((radioVariant) => (
+              <label htmlFor={`${VARIANT_RADIO_GROUP_NAME}-${radioVariant}`} key={`${radioVariant}-key`}>
+                <input
+                  id={`${VARIANT_RADIO_GROUP_NAME}-${radioVariant}`}
+                  type="radio"
+                  name={VARIANT_RADIO_GROUP_NAME}
+                  value={radioVariant}
+                  checked={variant === radioVariant}
+                  onChange={handleVariantChange}
+                />
+                {radioVariant}
+              </label>
+            ))}
 
             {/* TODO Other Variant radio buttons here */}
           </div>
