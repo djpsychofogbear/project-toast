@@ -1,4 +1,5 @@
 import React from 'react';
+import ToastProvider from '../ToastProvider/ToastProvider';
 
 import ToastPlayground from '../ToastPlayground';
 import Footer from '../Footer';
@@ -6,8 +7,10 @@ import Footer from '../Footer';
 function App(): React.ReactElement {
   return (
     <>
-      <ToastPlayground />
-      <Footer />
+      <ToastProvider>
+        <ToastPlayground />
+        <Footer />
+      </ToastProvider>
     </>
   );
 }
