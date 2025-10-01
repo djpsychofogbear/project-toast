@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '../Button';
 import { type ToastVariant, useToast } from '../ToastProvider/ToastProvider';
 import ToastShelf from '../ToastShelf';
+import { useKeydownListener } from '../../hooks/useKeydownListener';
 
 import styles from './ToastPlayground.module.css';
 
@@ -38,19 +39,7 @@ function ToastPlayground(): React.ReactElement {
         setMessage(event.target.value);
     };
 
-    React.useEffect(() => {
-        function handleKeyDown(event: KeyboardEvent) {
-            if (event.key === 'Escape') {
-                clearToasts();
-            }
-        }
-
-        window.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, []);
+    useKeydownListener('Escape', clearToasts);
 
     return (
         <div className={styles.wrapper}>
