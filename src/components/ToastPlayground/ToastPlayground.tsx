@@ -17,7 +17,7 @@ const VARIANT_RADIO_GROUP_NAME = 'variant';
 function ToastPlayground(): React.ReactElement {
     const [variant, setVariant] = React.useState<ToastVariant>('notice');
     const [message, setMessage] = React.useState<string>('');
-    const { toasts, addToast, dismissToast } = useToast();
+    const { toasts, addToast, dismissToast, clearToasts } = useToast();
 
     const handleVariantChange = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -37,6 +37,20 @@ function ToastPlayground(): React.ReactElement {
     ) => {
         setMessage(event.target.value);
     };
+
+    React.useEffect(() => {
+        function handleKeyDown(event: KeyboardEvent) {
+            if (event.key === 'Escape') {
+                clearToasts();
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
 
     return (
         <div className={styles.wrapper}>
